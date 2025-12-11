@@ -94,6 +94,10 @@ Capabilities: {
 		Property	: 'EndDate',
 		AllowedExpressions: 'SingleRange'
 	},
+  {
+		Property	: 'BeginDate',
+		AllowedExpressions: 'SingleRange'
+	},
 	]}
 });
 

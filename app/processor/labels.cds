@@ -12,13 +12,13 @@ annotate schema.Travel with @title: '{i18n>Travel}' {
   Description  @title: '{i18n>Description}';
   BookingFee   @title: '{i18n>BookingFee}'    @Measures.ISOCurrency: CurrencyCode_code;
   TotalPrice   @title: '{i18n>TotalPrice}'    @Measures.ISOCurrency: CurrencyCode_code;
-  TravelStatus @title: '{i18n>TravelStatus}';
-  to_Customer  @title: '{i18n>CustomerID}';
-  to_Agency    @title: '{i18n>AgencyID}';
+  TravelStatus @title: '{i18n>TravelStatus}' @Common.Text: TravelStatus.name @Common.TextArrangement : #TextFirst;
+  to_Customer  @title: '{i18n>CustomerID}' @Common : { Text : to_Customer.LastName, };
+  to_Agency    @title: '{i18n>AgencyID}' @Common.Text: to_Agency.Name @Common : { TextArrangement : #TextFirst }; 
 }
 
 annotate schema.TravelStatus with {
-  code @Common.Text: name @Common.TextArrangement: #TextOnly
+  code @Common.Text: name @Common.TextArrangement : #TextOnly
 }
 
 annotate schema.Booking with @title: '{i18n>Booking}' {

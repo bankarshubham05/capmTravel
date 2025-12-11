@@ -49,7 +49,8 @@
       "libs": {
         "sap.m": {},
         "sap.ui.core": {},
-        "sap.fe.templates": {}
+        "sap.fe.templates": {},
+        "sap.f": {}
       }
     },
     "contentDensities": {
@@ -81,22 +82,37 @@
       "css": []
     },
     "routing": {
-      "config": {},
+      "config": {
+        "flexibleColumnLayout": {
+          "defaultTwoColumnLayoutType": "TwoColumnsBeginExpanded",
+          "defaultThreeColumnLayoutType": "ThreeColumnsEndExpanded"
+        },
+        "routerClass": "sap.f.routing.Router"
+      },
       "routes": [
         {
           "pattern": ":?query:",
           "name": "TravelEtList",
-          "target": "TravelEtList"
+          "target": [
+            "TravelEtList"
+          ]
         },
         {
           "pattern": "TravelEt({key}):?query:",
           "name": "TravelEtObjectPage",
-          "target": "TravelEtObjectPage"
+          "target": [
+            "TravelEtList",
+            "TravelEtObjectPage"
+          ]
         },
         {
           "pattern": "TravelEt({key})/to_Booking({key2}):?query:",
           "name": "BookingObjectPage",
-          "target": "BookingObjectPage"
+          "target": [
+            "TravelEtList",
+            "TravelEtObjectPage",
+            "BookingObjectPage"
+          ]
         }
       ],
       "targets": {
@@ -123,7 +139,9 @@
                 }
               }
             }
-          }
+          },
+          "controlAggregation": "beginColumnPages",
+          "contextPattern": ""
         },
         "TravelEtObjectPage": {
           "type": "Component",
@@ -141,7 +159,9 @@
                 }
               }
             }
-          }
+          },
+          "controlAggregation": "midColumnPages",
+          "contextPattern": "/TravelEt({key})"
         },
         "BookingObjectPage": {
           "type": "Component",
@@ -152,9 +172,17 @@
               "editableHeaderContent": false,
               "contextPath": "/TravelEt/to_Booking"
             }
-          }
+          },
+          "controlAggregation": "endColumnPages",
+          "contextPattern": "/TravelEt({key})/to_Booking({key2})"
         }
       }
+    },
+    "rootView": {
+      "viewName": "sap.fe.templates.RootContainer.view.Fcl",
+      "type": "XML",
+      "async": true,
+      "id": "appRootView"
     }
   },
   "sap.fiori": {
